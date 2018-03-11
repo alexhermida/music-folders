@@ -24,6 +24,7 @@ def get_audiofile(file_path):
     audiofile = eyed3.load(file_path)
     return audiofile
 
+
 def set_tags(audiofile, album):
     if not audiofile.tag:
         audiofile.initTag()
@@ -32,12 +33,14 @@ def set_tags(audiofile, album):
         audiofile.tag.album = album
         audiofile.tag.save()
 
+
 def main():
     parser = argparse.ArgumentParser(description='Use mp3 files parent directory name to set album name for mp3 files with empty tag.')
     parser.add_argument('directory', type=str, help='mp3 main directory path')
     args = parser.parse_args()
     print(args.dir)
     iterate_files(args.dir)
+
 
 if __name__ == '__main__':
     main()
