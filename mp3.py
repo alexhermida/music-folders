@@ -37,9 +37,9 @@ def set_tags(audiofile, album):
         audiofile.initTag()
     if not audiofile.tag.album:
         filename = os.path.basename(audiofile.path)
-        # audiofile.tag.album = album
-        # audiofile.tag.save()
-        logger.info(f'Album of "{filename}" updated to "{album}"')
+        audiofile.tag.album = album
+        audiofile.tag.save()
+        logger.info(f'File "{filename}" updated album name to "{album}"')
 
 
 def main():
