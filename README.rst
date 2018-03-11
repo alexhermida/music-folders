@@ -2,7 +2,10 @@ POC tool to set album names to music files
 ==========================================
 
 Tiny command line utility to set album name to
-files that don't have it using [eyeD3](https://github.com/nicfit/eyeD3)
+files that don't have it using eyeD3_.
+
+.. _eyeD3: https://github.com/nicfit/eyeD3
+
 If you have many downloaded `mp3` files without
 album name you can organize them in folders and the
 tool can set the name for you using the parent folder name.
@@ -26,7 +29,7 @@ Requirements
 ------------
 
 * Python >=3.6
-* Pipenv [https://github.com/pypa/pipenv/](https://github.com/pypa/pipenv/)
+* Pipenv https://github.com/pypa/pipenv/
 
 
 Running the program
