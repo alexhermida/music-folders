@@ -1,22 +1,29 @@
 #!.venv/bin/python
 import argparse
 import logging
-from os import listdir, path, sep
+import os
 
 import eyed3
 
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+handler = logging.FileHandler('mp3.log')
+handler.setLevel(logging.DEBUG)
+formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+handler.setFormatter(formatter)
+logger.addHandler(handler)
+
 
 def iterate_files(directory):
-    for dir_item in listdir(directory):
-        file_path = path.join(directory, dir_item)
+    for dir_item in os.listdir(directory):
+        file_path = os.path.join(directory, dir_item)
 
-        if path.isdir(file_path):
+        if os.path.isdir(file_path):
             iterate_files(file_path)
-            print('isdir')
-        elif path.isfile(file_path):
+        elif os.path.isfile(file_path):
             audiofile = get_audiofile(file_path)
             if audiofile:
-                directory_name = file_path.split(sep)[-2:-1].pop()
+                directory_name = file_path.split(os.sep)[-2:-1].pop()
                 set_tags(audiofile, directory_name)
 
 
@@ -29,17 +36,20 @@ def set_tags(audiofile, album):
     if not audiofile.tag:
         audiofile.initTag()
     if not audiofile.tag.album:
-        print('Setting album name to:', album)
-        audiofile.tag.album = album
-        audiofile.tag.save()
+        filename = os.path.basename(audiofile.path)
+        # audiofile.tag.album = album
+        # audiofile.tag.save()
+        logger.info(f'Album of "{filename}" updated to "{album}"')
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Use mp3 files parent directory name to set album name for mp3 files with empty tag.')
+    parser = argparse.ArgumentParser(
+        description="Use mp3 files parent directory name\
+        to set album name for mp3 files with empty tag.")
     parser.add_argument('directory', type=str, help='mp3 main directory path')
     args = parser.parse_args()
-    print(args.dir)
-    iterate_files(args.dir)
+    logger.debug(f'Running inside of: {args.directory}')
+    iterate_files(args.directory)
 
 
 if __name__ == '__main__':
