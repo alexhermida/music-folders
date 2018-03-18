@@ -14,9 +14,9 @@ This is specially useful when you have a music player
 (car player, mp3 portable player, etc.) that it isn't
 browsable between folders.
 
-The goal of this tool is not only the above but
+**The goal of this tool is not only the above but
 also to be an example of using Python with different
-tools and modules like:
+tools and modules like:**
 
 - pipenv
 - flake8
