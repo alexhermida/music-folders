@@ -42,3 +42,11 @@ Just use pipenv::
 Or, if you're using other virtualenv manager:
 
     $ python mp3.py {directory_path}
+
+
+Optional arguments:
+
+.. code::
+
+    -h, --help         show this help message and exit
+    --overwrite_title  Overwrites files title tag with filename
