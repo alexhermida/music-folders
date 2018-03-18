@@ -2,6 +2,7 @@
 import argparse
 import logging
 import os
+import sys
 
 import eyed3
 
@@ -61,7 +62,7 @@ def set_title_tag(audiofile, overwrite_title):
         f'File "{audiofile.path}" updated Title to "{audiofile.tag.title}"')
 
 
-def main():
+def create_parser(args):
     parser = argparse.ArgumentParser(
         description="Use mp3 files parent directory name\
         to set album name for mp3 files with empty tag.")
@@ -71,10 +72,14 @@ def main():
         help="Overwrites files title tag with filename",
         action="store_true")
 
-    args = parser.parse_args()
-    logger.debug(f'Running inside of: {args.directory}')
+    return parser.parse_args(args)
 
-    iterate_files(args.directory, overwrite_title=args.overwrite_title)
+
+def main():
+    parser = create_parser(sys.argv[1:])
+    logger.debug(f'Running inside of: {parser.directory}')
+    iterate_files(parser.directory,
+                  overwrite_title=parser.overwrite_title)
 
 
 if __name__ == '__main__':
