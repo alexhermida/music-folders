@@ -1,3 +1,6 @@
+.. image:: https://travis-ci.org/alexhermida/music-folders.svg?branch=master
+    :target: https://travis-ci.org/alexhermida/music-folders
+
 POC tool to set album names to music files
 ==========================================
 
